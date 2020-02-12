@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="Pressure_Tank_FTA_v1">
+<B:Comment>This version includes all the models described in the paper titled 'Supervisory Control Theory in System Safety Analysis' by YS, ZF, and MF. 
+
+The Specification model by name 'Spec_E1_Complete' is not included in the paper and therefore can be ignored. 
+
+</B:Comment>
+<EventDeclList>
+<EventDecl Kind="CONTROLLABLE" Name="K1"/>
+<EventDecl Kind="CONTROLLABLE" Name="R"/>
+<EventDecl Kind="CONTROLLABLE" Name="S1"/>
+<EventDecl Kind="CONTROLLABLE" Name="E5"/>
+<EventDecl Kind="CONTROLLABLE" Name="E4"/>
+<EventDecl Kind="CONTROLLABLE" Name="S"/>
+<EventDecl Kind="CONTROLLABLE" Name="E3"/>
+<EventDecl Kind="CONTROLLABLE" Name="K2"/>
+<EventDecl Kind="CONTROLLABLE" Name="E2"/>
+<EventDecl Kind="CONTROLLABLE" Name="T"/>
+<EventDecl Kind="PROPOSITION" Name=":accepting"/>
+</EventDeclList>
+<ComponentList>
+<SimpleComponent Kind="PLANT" Name="Power_thru_K1">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="A0">
+<PointGeometry>
+<Point X="96" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="E5">
+<PointGeometry>
+<Point X="304" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="A0" Target="E5">
+<LabelBlock>
+<SimpleIdentifier Name="K1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-27"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="200" Y="96"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="A0" Target="E5">
+<LabelBlock>
+<SimpleIdentifier Name="R"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="200" Y="128"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="Power_thru_S">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="A1">
+<PointGeometry>
+<Point X="80" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="E4">
+<PointGeometry>
+<Point X="256" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="A1" Target="E4">
+<LabelBlock>
+<SimpleIdentifier Name="S1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-18" Y="-26"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="168" Y="128"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="A1" Target="E4">
+<LabelBlock>
+<SimpleIdentifier Name="E5"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="11"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="168" Y="160"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="Power_thru_K1 == E5">
+<SimpleIdentifier Name="Power_thru_K1"/>
+<SimpleIdentifier Name="E5"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-55" Y="33"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="Power_at_K2">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="A2">
+<PointGeometry>
+<Point X="96" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="A2_Inter1">
+<PointGeometry>
+<Point X="240" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="-9"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="E3">
+<PointGeometry>
+<Point X="240" Y="224"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="A2_Inter2">
+<PointGeometry>
+<Point X="96" Y="224"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-68" Y="-4"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="A2" Target="A2_Inter1">
+<LabelBlock>
+<SimpleIdentifier Name="E4"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-27"/>
+</LabelGeometry>
+</LabelBlock>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="Power_thru_S == E4">
+<SimpleIdentifier Name="Power_thru_S"/>
+<SimpleIdentifier Name="E4"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-50" Y="-47"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="A2_Inter1" Target="E3">
+<LabelBlock>
+<SimpleIdentifier Name="S"/>
+<LabelGeometry Anchor="NW">
+<Point X="4" Y="-12"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="A2" Target="A2_Inter2">
+<LabelBlock>
+<SimpleIdentifier Name="S"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-11"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="A2_Inter2" Target="E3">
+<LabelBlock>
+<SimpleIdentifier Name="E4"/>
+<LabelGeometry Anchor="NW">
+<Point X="-9" Y="10"/>
+</LabelGeometry>
+</LabelBlock>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="Power_thru_S == E4">
+<SimpleIdentifier Name="Power_thru_S"/>
+<SimpleIdentifier Name="E4"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-56" Y="30"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="K2_closed">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="A3">
+<PointGeometry>
+<Point X="128" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="E2">
+<PointGeometry>
+<Point X="320" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="A3" Target="E2">
+<LabelBlock>
+<SimpleIdentifier Name="E3"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="-28"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="224" Y="144"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="Power_at_K2 == E3">
+<SimpleIdentifier Name="Power_at_K2"/>
+<SimpleIdentifier Name="E3"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-51" Y="-44"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="A3" Target="E2">
+<LabelBlock>
+<SimpleIdentifier Name="K2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="224" Y="176"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="Tank_Rupture">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="A4">
+<PointGeometry>
+<Point X="80" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-8" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="E1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="288" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="A4" Target="E1">
+<LabelBlock>
+<SimpleIdentifier Name="E2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-2" Y="-22"/>
+</LabelGeometry>
+</LabelBlock>
+<StartPointGeometry>
+<Point X="80" Y="144"/>
+</StartPointGeometry>
+<SplineGeometry>
+<Point X="180" Y="109"/>
+</SplineGeometry>
+<GuardActionBlock>
+<Guards>
+<BinaryExpression Operator="==" Text="K2_closed == E2">
+<SimpleIdentifier Name="K2_closed"/>
+<SimpleIdentifier Name="E2"/>
+</BinaryExpression>
+</Guards>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="-41"/>
+</LabelGeometry>
+</GuardActionBlock>
+</Edge>
+<Edge Source="A4" Target="E1">
+<LabelBlock>
+<SimpleIdentifier Name="T"/>
+<LabelGeometry Anchor="NW">
+<Point X="-6" Y="10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="178" Y="170"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="Spec_K2">
+<Graph>
+<LabelBlock>
+<SimpleIdentifier Name="K1"/>
+<SimpleIdentifier Name="R"/>
+<SimpleIdentifier Name="S"/>
+<SimpleIdentifier Name="S1"/>
+<SimpleIdentifier Name="T"/>
+<LabelGeometry Anchor="NW">
+<Point X="313" Y="98"/>
+</LabelGeometry>
+</LabelBlock>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="112" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="288" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="K2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="-22"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="Spec_S_R">
+<Graph>
+<LabelBlock>
+<SimpleIdentifier Name="S1"/>
+<SimpleIdentifier Name="K1"/>
+<SimpleIdentifier Name="K2"/>
+<SimpleIdentifier Name="T"/>
+<LabelGeometry Anchor="NW">
+<Point X="311" Y="64"/>
+</LabelGeometry>
+</LabelBlock>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="48" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<PointGeometry>
+<Point X="160" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-9" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S2">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="272" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="4" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="R"/>
+<LabelGeometry Anchor="NW">
+<Point X="-10" Y="-27"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="81"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="S"/>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="111"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="S"/>
+<LabelGeometry Anchor="NW">
+<Point X="6" Y="-20"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="216" Y="81"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S1" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="R"/>
+<LabelGeometry Anchor="NW">
+<Point X="-32" Y="7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="216" Y="111"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="Spec_S">
+<Graph>
+<LabelBlock>
+<SimpleIdentifier Name="T"/>
+<SimpleIdentifier Name="R"/>
+<SimpleIdentifier Name="S1"/>
+<SimpleIdentifier Name="K2"/>
+<SimpleIdentifier Name="K1"/>
+<LabelGeometry Anchor="NW">
+<Point X="245" Y="95"/>
+</LabelGeometry>
+</LabelBlock>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="64" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="208" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="S"/>
+<LabelGeometry Anchor="NW">
+<Point X="-16" Y="4"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="Spec_E1_Complete">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="S0">
+<PointGeometry>
+<Point X="64" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="S1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="208" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="0" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="T"/>
+<LabelGeometry Anchor="NW">
+<Point X="-10" Y="-25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="136" Y="96"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="S0" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="E2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="136" Y="128"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+</ComponentList>
+</Module>
